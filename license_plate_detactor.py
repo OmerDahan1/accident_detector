@@ -1,7 +1,6 @@
 from utils import crop_frame_by_detaction
 from roboflow_client import CLIENT as CLIENT
 
-
 def detact_license_plate(image):
     result = CLIENT.infer(image, model_id="np_detection-xgvjf/2")
     for prediction in result["predictions"]:
