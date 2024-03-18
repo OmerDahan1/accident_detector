@@ -1,4 +1,3 @@
-from inference_sdk import InferenceHTTPClient
 from utils import crop_frame_by_detaction
 from roboflow_client import CLIENT as CLIENT
 
