@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ```
 ROBOFLOW_API_KEY=your_api_key
 ```
-3.  **For now make sure you have the following directorie vidoes with test.mp4**
+3.  **For now make sure you have the following directory videos with test.mp4**
 
 ## Usage
 ```

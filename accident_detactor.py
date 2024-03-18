@@ -5,7 +5,7 @@ from utils import crop_frame_by_detaction
 import os
 from roboflow_client import CLIENT as CLIENT
 
-VIDEO_PATH = "videos/test.mp4"
+VIDEO_PATH = "videos/accident1.mp4"
 IMAGE_OUTPUT_DIR = "output"
 
 for frame_id, frame, results in CLIENT.infer_on_stream(VIDEO_PATH, model_id="incidents-project/1"):
