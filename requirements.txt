@@ -1,2 +1,5 @@
 opencv-python
 inference
+fastapi
+pydantic
+uvicorn
