@@ -29,6 +29,6 @@ jobs:
           uses: azure/container-apps-deploy-action@v1
           with:
             acrName: ${{ vars.REPOSITORY_NAME}}
-            containerAppName: ${{ vars.REPOSITORY_NAME}}
-            resourceGroup: DefaultResourceGroup-WUS
+            containerAppName: accident-detector
+            resourceGroup: accident-detection
             imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
