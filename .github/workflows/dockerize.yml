@@ -25,10 +25,10 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
 
-        - name: Build and deploy Container App
+        - name: 'Deploy Container App'
           uses: azure/container-apps-deploy-action@v1
           with:
             acrName: ${{ vars.REPOSITORY_NAME}}
             containerAppName: ${{ vars.REPOSITORY_NAME}}
-            resourceGroup: accident-detection
+            resourceGroup: DefaultResourceGroup-WUS
             imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
