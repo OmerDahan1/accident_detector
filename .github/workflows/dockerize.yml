@@ -25,14 +25,10 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
 
-        - name: 'Deploy to Azure Container Instances'
-          uses: 'azure/aci-deploy@v1'
+        - name: Build and deploy Container App
+          uses: azure/container-apps-deploy-action@v1
           with:
-            resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.REPOSITORY_NAME}}:${{ github.ref_name }}-${{  github.run_number  }}
-            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            registry-username: ${{ secrets.REGISTRY_USERNAME }}
-            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-            name: aci-sampleapp
-            location: 'west us'
+            acrName: ${{ vars.REPOSITORY_NAME}}
+            containerAppName: ${{ vars.REPOSITORY_NAME}}
+            resourceGroup: accident-detection
+            imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
