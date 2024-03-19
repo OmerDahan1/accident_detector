@@ -21,9 +21,9 @@ jobs:
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
         - run: |
-            echo ${{ env.REPOSITORY_NAME}} 
-            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
+            echo ${{ vars.REPOSITORY_NAME}} 
+            docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
 
         - name: 'Deploy to Azure Container Instances'
           uses: 'azure/aci-deploy@v1'
