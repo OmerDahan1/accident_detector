@@ -27,6 +27,7 @@ jobs:
 
 
         - name: Deploy Container App with Custom Script
+          uses: actions/checkout@v4
           run: |
             ls -la # list files to debug
             chmod +x ./deploy_container_app.sh # make script executable
