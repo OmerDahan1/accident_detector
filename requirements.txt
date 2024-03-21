@@ -3,3 +3,4 @@ inference
 fastapi
 pydantic
 uvicorn
+numpy
