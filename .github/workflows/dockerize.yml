@@ -28,7 +28,7 @@ jobs:
         - name: Deploy Container App with Custom Script
           run: |
             ls -la
-            chmod +x my-script.sh ./deploy_container_app.sh
+            chmod +x ./deploy_container_app.sh
             ./deploy_container_app.sh
           shell: bash
           env:
