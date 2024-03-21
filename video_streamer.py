@@ -34,8 +34,7 @@ while True:
         request_url,
         files={"file": ("frame.jpg", io_buf, "image/jpeg")},
     )
-    # Display the frame
-    # cv2.imshow('Frame', frame)
+    print(response.json())
     frame_id += 1
 
 # Release the video capture object and close all frames

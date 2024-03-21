@@ -2,13 +2,13 @@
 # import cv2
 # from server.utils import crop_frame_by_detaction
 # import os
-# from roboflow_client import CLIENT as CLIENT
+# from roboflow_client import ROBOFLOW_CLIENT as ROBOFLOW_CLIENT
 # from make_call import make_call
 #
 # VIDEO_PATH = "videos/accident1.mp4"
 # IMAGE_OUTPUT_DIR = "output"
 # SYMBOLS_IN_LIST = set()
-# for frame_id, frame, results in CLIENT.infer_on_stream(VIDEO_PATH, model_id="incidents-project/1"):
+# for frame_id, frame, results in ROBOFLOW_CLIENT.infer_on_stream(VIDEO_PATH, model_id="incidents-project/1"):
 #     for prediction in results["predictions"]:
 #         if prediction["class"] != "vehicle":
 #             continue

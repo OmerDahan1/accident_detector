@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "accident-detector"
+version = "0.1.0"
+description = ""
+authors = ["Tomer Shukhman <tomer.shukhman@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+opencv-python = "^4.9.0.80"
+numpy = "^1.26.4"
+fastapi = "^0.110.0"
+uvicorn = "^0.29.0"
+python-multipart = "^0.0.9"
+requests = "^2.31.0"
+roboflow = "^1.1.24"
+inference-sdk = "^0.9.17"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,3 +1,6 @@
+*.env
+
+
 videos/*
 output/*
 local.env

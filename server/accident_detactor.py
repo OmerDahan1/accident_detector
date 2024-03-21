@@ -1,6 +1,6 @@
 from .license_plate_detactor import LicensePlateDetector
 from .utils import crop_frame_by_detaction
-from server import CLIENT
+from server import ROBOFLOW_CLIENT
 
 
 class AccidentDetector:
@@ -11,7 +11,7 @@ class AccidentDetector:
 
     def detact(self, frame):
         try:
-            results = CLIENT.infer(frame, model_id="incidents-project/1")
+            results = ROBOFLOW_CLIENT.infer(frame, model_id="incidents-project/1")
         except Exception as e:
             print(f"An error occurred during the external API call: {e}")
             # Optionally log the error or handle it as needed
