@@ -4,6 +4,10 @@ name: Linux_Container_Workflow
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
+        defaults:
+          run:
+            shell: bash
+            working-directory: ./scripts
         steps:
         # checkout the repo
         - name: 'Checkout GitHub Action'
@@ -25,11 +29,12 @@ jobs:
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
 
+        - name: Make the script files executable
+          run: chmod +x deploy_container_app.sh
+
         - name: Deploy Container App with Custom Script
           run: |
-            ls -la
             ./deploy_container_app.sh
-          shell: bash
           env:
             REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
             REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
