@@ -27,7 +27,9 @@ jobs:
 
         - name: Deploy Container App with Custom Script
           run: |
+            chmod +x deploy_container_app.sh
             deploy_container_app.sh
+          shell: bash
           env:
             REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
             REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
