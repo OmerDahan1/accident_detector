@@ -27,11 +27,10 @@ jobs:
 
 
         - name: Deploy Container App with Custom Script
-          uses: actions/checkout@v4
+          working-directory: scripts
           run: |
             ls -la # list files to debug
-            chmod +x ./deploy_container_app.sh # make script executable
-            ./deploy_container_app.sh # execute the script
+            deploy_container_app.sh # execute the script
           shell: bash
           env:
             REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
