@@ -26,20 +26,12 @@ jobs:
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
 
 
-        - name: Azure CLI script file
-          uses: azure/cli@v2
+        - name: Build and deploy Container App
+          uses: azure/container-apps-deploy-action@v1
           with:
-            azcliversion: 2.30.0
-            inlineScript: |
-              ls -la $GITHUB_WORKSPACE/scripts/
-              chmod +x $GITHUB_WORKSPACE/scripts/deploy_container_app.sh
-              $GITHUB_WORKSPACE/scripts/deploy_container_app.sh
-
-          env:
-            REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
-            REGISTRY_LOGIN_SERVER: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            ROBOFLOW_API_KEY: ${{ secrets.ROBOFLOW_API_KEY }}
-            CALLER_API_KEY: ${{ secrets.CALLER_API_KEY }}
-            CALLER_SECRET_KEY: ${{ secrets.CALLER_SECRET_KEY }}
-            GITHUB_REF_NAME: ${{ github.ref_name }}
-            GITHUB_RUN_NUMBER: ${{ github.run_number }}
+            acrName: detector
+            containerAppName: accident-detector
+            resourceGroup: accident-detection
+            imageToDeploy: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}}
+            environmentVariables: |
+              "ROBOFLOW_API_KEY=secretref:ROBOFLOW_API_KEY" "CALLER_SECRET_KEY=secretref:CALLER_SECRET_KEY" "CALLER_API_KEY=secretref:CALLER_API_KEY"
