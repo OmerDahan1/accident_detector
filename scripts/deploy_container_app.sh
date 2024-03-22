@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Define variables
-ACR_NAME="${{ vars.REPOSITORY_NAME }}"
+ACR_NAME="$REPOSITORY_NAME"
 CONTAINER_APP_NAME="accident-detector"
 RESOURCE_GROUP="accident-detection"
-IMAGE_TO_DEPLOY="${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME }}:${{ github.ref_name }}-${{ github.run_number }}"
+IMAGE_TO_DEPLOY="$REGISTRY_LOGIN_SERVER/$REPOSITORY_NAME:${GITHUB_REF_NAME}-${GITHUB_RUN_NUMBER}"
 
 # Login to Azure Container Registry
 echo "Logging in to Azure Container Registry..."
@@ -16,8 +16,6 @@ az containerapp update \
   --name $CONTAINER_APP_NAME \
   --resource-group $RESOURCE_GROUP \
   --image $IMAGE_TO_DEPLOY \
-  --environment-variables ROBOFLOW_API_KEY="${{ secrets.ROBOFLOW_API_KEY }}" CALLER_API_KEY="${{ secrets.CALLER_API_KEY }}" CALLER_SECRET_KEY="${{ secrets.CALLER_SECRET_KEY }}"
+  --environment-variables ROBOFLOW_API_KEY="$ROBOFLOW_API_KEY" CALLER_API_KEY="$CALLER_API_KEY" CALLER_SECRET_KEY="$CALLER_SECRET_KEY"
 
 echo "Deployment completed successfully."
-
-# Note: Make sure to replace the variable placeholders with the actual values where necessary.
