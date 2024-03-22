@@ -30,7 +30,7 @@ jobs:
           working-directory: scripts
           run: |
             ls -la # list files to debug
-            deploy_container_app.sh # execute the script
+            ./deploy_container_app.sh # execute the script
           shell: bash
           env:
             REPOSITORY_NAME: ${{ secrets.REPOSITORY_NAME }}
