@@ -28,6 +28,7 @@ async def get_license_plate_symbols():
 @app.post("/report_accident/")
 async def report_accident(plates: list[str]):
     make_call(plates)
+    RedisProvider.flush_license_plate_numbers()
     return {"message": f"Calling the emergency service for the following cars: {plates}"}
 
 
