@@ -4,6 +4,7 @@ from server import ROBOFLOW_CLIENT
 from server import logger
 from .redisProvider import RedisProvider
 
+
 class AccidentDetector:
     def __init__(self):
         self.symbols_list = []
@@ -37,8 +38,8 @@ class AccidentDetector:
                     if (len(symbols) != 7 and len(symbols) != 8):
                         logger.info(f"frame {frame_id}: license plate number is not valid ")
                         continue
-
-                    RedisProvider.add_license_plate_number(symbols_string)
+                    self.symbols_list.append(symbols_string)
+                    RedisProvider.add_license_plate_number(self.symbols_list)
                     logger.info(f"frame {frame_id}: added {symbols_string}")
 
         # Depending on your application's needs, you might want to return some information even when the API fails
