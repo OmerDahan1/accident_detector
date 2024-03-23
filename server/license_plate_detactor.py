@@ -17,7 +17,6 @@ class LicensePlateDetector:
             # Optionally log the error or handle it as needed
             return None  # or handle it in another appropriate way
         for prediction in result["predictions"]:
-
             res = crop_frame_by_detaction(image, prediction)
             return res
         return None
@@ -33,4 +32,6 @@ class LicensePlateDetector:
         predictions = results["predictions"]
         predictions = sorted(predictions, key=lambda item: item['x'])
         symbols = [prediction["class"] for prediction in predictions]
+        if len(symbols) > 0:
+            logger.info(f"Extracted symbols: {symbols}")
         return symbols
