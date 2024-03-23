@@ -18,3 +18,10 @@ logging.config.dictConfig(LOGGING_CONFIG)
 
 # Obtain a reference to the configured logger
 logger = logging.getLogger('server_logger')
+
+import redis
+
+REDIS_HOSTNAME = os.environ.get("REDIS_HOSTNAME")
+REDIS_PASSWORD = os.environ.get("REDIS_PASSWORD")
+REDIS_CONNECTION = redis.StrictRedis(host=REDIS_HOSTNAME, port=6380,
+                                     password=REDIS_PASSWORD, ssl=True)

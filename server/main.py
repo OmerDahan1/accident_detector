@@ -4,10 +4,11 @@ import cv2
 import numpy as np
 from .accident_detactor import AccidentDetector
 from .caller import make_call
-
+from .redisProvider import RedisProvider
 
 app = FastAPI()
 accident_detector = AccidentDetector()
+RedisProvider = RedisProvider()
 
 
 @app.post("/uploadframe/")
@@ -21,7 +22,7 @@ async def upload_frame(background_tasks: BackgroundTasks, frame_id: int, file: U
 
 @app.get("/get_license_plate_symbols/")
 async def get_license_plate_symbols():
-    return JSONResponse(content=accident_detector.symbols_list)
+    return JSONResponse(content=RedisProvider.get_license_plate_numbers())
 
 
 @app.post("/report_accident/")

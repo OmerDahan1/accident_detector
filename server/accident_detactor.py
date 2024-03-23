@@ -2,7 +2,7 @@ from .license_plate_detactor import LicensePlateDetector
 from .utils import crop_frame_by_detaction
 from server import ROBOFLOW_CLIENT
 from server import logger
-
+from .redisProvider import RedisProvider
 
 class AccidentDetector:
     def __init__(self):
@@ -37,10 +37,7 @@ class AccidentDetector:
                     if (len(symbols) != 7 and len(symbols) != 8):
                         logger.info(f"frame {frame_id}: license plate number is not valid ")
                         continue
-                    if symbols_string in self.symbols_list:
-                        logger.info(
-                            f"frame {frame_id}: license plate {symbols_string} number is already in the list")
-                        continue
+
                     logger.info(f"frame {frame_id}: added {symbols_string}")
                     self.symbols_list.append(symbols_string)
 
