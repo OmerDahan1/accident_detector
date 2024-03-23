@@ -6,8 +6,11 @@ import requests
 # If the input is the camera, pass 0 instead of the video file name
 VIDEO_PATH = "videos/test.mp4"
 cap = cv2.VideoCapture(VIDEO_PATH)
-# BASE_URL = "http://localhost:8000"
-BASE_URL="https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
+DEBUG_MODE = True
+if DEBUG_MODE:
+    BASE_URL = "http://localhost:8000"
+else:
+    BASE_URL="https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
 
 # Read until video is completed
 

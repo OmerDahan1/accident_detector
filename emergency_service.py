@@ -2,8 +2,11 @@ import time
 
 import requests
 
-BASE_URL = "http://localhost:8000"
-# BASE_URL="https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
+DEBUG_MODE = True
+if DEBUG_MODE:
+    BASE_URL = "http://localhost:8000"
+else:
+    BASE_URL="https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
 
 
 def make_call(lisence_plate_number_list):

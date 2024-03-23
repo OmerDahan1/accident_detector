@@ -38,8 +38,8 @@ class AccidentDetector:
                         logger.info(f"frame {frame_id}: license plate number is not valid ")
                         continue
 
+                    RedisProvider.add_license_plate_number(symbols_string)
                     logger.info(f"frame {frame_id}: added {symbols_string}")
-                    self.symbols_list.append(symbols_string)
 
         # Depending on your application's needs, you might want to return some information even when the API fails
         return None  # or return a meaningful value
