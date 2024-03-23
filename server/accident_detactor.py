@@ -11,8 +11,8 @@ class AccidentDetector:
         self.license_plate_detector = LicensePlateDetector()
 
     def detact(self, frame, frame_id):
+        symbols_string = ""
         logger.info(f"Processing frame {frame_id} in the background")
-        symbols_string = []
         try:
             results = ROBOFLOW_CLIENT.infer(frame, model_id="incidents-project/1")
         except Exception as e:
@@ -39,11 +39,10 @@ class AccidentDetector:
                         continue
                     if symbols_string in self.symbols_list:
                         logger.info(
-                            f"frame {frame_id} :license plate {symbols_string} number is already in the list")
+                            f"frame {frame_id}: license plate {symbols_string} number is already in the list")
                         continue
-                # print(f"added {symbols_string}")
-                logger.info(f"frame {frame_id}: added {symbols_string}")
-                self.symbols_list.append(symbols_string)
+                    logger.info(f"frame {frame_id}: added {symbols_string}")
+                    self.symbols_list.append(symbols_string)
 
         # Depending on your application's needs, you might want to return some information even when the API fails
         return None  # or return a meaningful value
