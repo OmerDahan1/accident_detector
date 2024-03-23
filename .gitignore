@@ -1,3 +1,6 @@
+*.env
+.idea/
+
 videos/*
 output/*
 local.env

@@ -7,7 +7,7 @@ jobs:
         steps:
         # checkout the repo
         - name: 'Checkout GitHub Action'
-          uses: actions/checkout@main
+          uses: actions/checkout@v4
 
         - name: 'Login via Azure CLI'
           uses: azure/login@v1
@@ -24,6 +24,7 @@ jobs:
             echo ${{ vars.REPOSITORY_NAME}} 
             docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ vars.REPOSITORY_NAME}}:${{ github.ref_name }}-${{ github.run_number }}
+
 
         - name: 'Deploy Container App'
           uses: azure/container-apps-deploy-action@v1

@@ -1,5 +1,8 @@
-opencv-python
-inference
-fastapi
-pydantic
-uvicorn
+opencv-python-headless>=4.8.0, <5.0
+numpy>=1.26.4, <2.0
+fastapi>=0.110.0, <1.0
+uvicorn>=0.29.0, <1.0
+python-multipart>=0.0.9, <1.0
+requests>=2.31.0, <3.0
+roboflow>=1.1.24, <2.0
+inference-sdk>=0.9.17, <1.0
