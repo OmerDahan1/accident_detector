@@ -6,3 +6,4 @@ python-multipart>=0.0.9, <1.0
 requests>=2.31.0, <3.0
 roboflow>=1.1.24, <2.0
 inference-sdk>=0.9.17, <1.0
+redis
