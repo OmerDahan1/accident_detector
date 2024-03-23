@@ -5,6 +5,7 @@ import numpy as np
 from .accident_detactor import AccidentDetector
 from .caller import make_call
 
+
 app = FastAPI()
 accident_detector = AccidentDetector()
 
@@ -14,7 +15,7 @@ async def upload_frame(background_tasks: BackgroundTasks, frame_id: int, file: U
     contents = await file.read()
     nparr = np.frombuffer(contents, np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    background_tasks.add_task(process_image, img)
+    background_tasks.add_task(process_image, img, frame_id)
     return {"message": f"Processing the {frame_id} in the background"}
 
 
@@ -29,5 +30,5 @@ async def report_accident(plates: list[str]):
     return {"message": f"Calling the emergency service for the following cars: {plates}"}
 
 
-def process_image(image):
-    return accident_detector.detact(image)
+def process_image(image, frame_id):
+    return accident_detector.detact(image, frame_id)

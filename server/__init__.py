@@ -10,3 +10,11 @@ ROBOFLOW_CLIENT = InferenceHTTPClient(
 CALLER_API_KEY = os.environ.get("CALLER_API_KEY")
 CALLER_SECRET_KEY = os.environ.get("CALLER_SECRET_KEY")
 
+import logging.config
+from .logging_config import LOGGING_CONFIG  # Import the logging configuration
+
+# Apply the logging configuration
+logging.config.dictConfig(LOGGING_CONFIG)
+
+# Obtain a reference to the configured logger
+logger = logging.getLogger('server_logger')

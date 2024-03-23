@@ -1,7 +1,7 @@
 import os
 import requests
 from server import CALLER_API_KEY, CALLER_SECRET_KEY
-
+from server import logger
 
 def get_call_text(lisence_plate_number_list):
     text = f"i am calling from the car accident detection system. We have a car accident at Haifa."
@@ -37,7 +37,7 @@ def make_call(lisence_plate_number_list):
 
     response = requests.post(url, json=payload, headers=headers, auth=(CALLER_API_KEY, CALLER_SECRET_KEY))
 
-    data = response.json()
-    # print(data)
+    logger.info(response.json())
+    return response.json()
 
 

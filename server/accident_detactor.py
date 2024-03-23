@@ -1,6 +1,7 @@
 from .license_plate_detactor import LicensePlateDetector
 from .utils import crop_frame_by_detaction
 from server import ROBOFLOW_CLIENT
+from server import logger
 
 
 class AccidentDetector:
@@ -9,18 +10,22 @@ class AccidentDetector:
         self.counter = 0
         self.license_plate_detector = LicensePlateDetector()
 
-    def detact(self, frame):
+    def detact(self, frame, frame_id):
+        logger.info(f"Processing the {frame_id} in the background")
         try:
-            results = ROBOFLOW_CLIENT.infer(frame, model_id="incidents-project/1")
+            results = ROBOFLOW_CLIENT.infer(frame, model_id="accident-z1fpf/1")
         except Exception as e:
-            print(f"An error occurred during the external API call: {e}")
-            # Optionally log the error or handle it as needed
+            logger.exception(f"An error occurred during the external API call: {e}")
             return None  # or handle it in another appropriate way
 
+        logger.info(f"frame {frame_id}: {results}")
         for prediction in results["predictions"]:
-            if prediction["class"] != "vehicle":
-                continue
 
+            # if prediction["class"] != "severe" or prediction["class"] != "moderate":
+            if prediction["class"] != "vehicle":
+                logger.info(f"frame {frame_id}: no predictions")
+                continue
+            logger.info(f"frame {frame_id}: detacted accident in - class {prediction['class']}")
             accident_crop_res = crop_frame_by_detaction(frame, prediction)
             if accident_crop_res is not None:
                 cropped_license_plate_res_ = self.license_plate_detector.detact(frame)
@@ -29,8 +34,10 @@ class AccidentDetector:
                     symbols = self.license_plate_detector.extract_license_plate_symbols(cropped_license_plate_frame)
                     symbols_string = ' '.join(symbols)
                     if symbols_string in self.symbols_list or (len(symbols) != 7 and len(symbols) != 8):
+                        logger.info(f"frame in frame {frame_id} :license plate number is already in the list or not valid ")
                         continue
-                    print(f"added {symbols_string}")
+                    # print(f"added {symbols_string}")
+                    logger.info(f"frame {frame_id}: added {symbols_string}")
                     self.symbols_list.append(symbols_string)
 
         # Depending on your application's needs, you might want to return some information even when the API fails
