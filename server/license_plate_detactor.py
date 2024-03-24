@@ -1,6 +1,7 @@
 from .utils import (crop_frame_by_detaction)
 from server import ROBOFLOW_CLIENT as ROBOFLOW_CLIENT
 from server import logger
+from inference_sdk import InferenceConfiguration
 
 
 class LicensePlateDetector:
@@ -22,8 +23,10 @@ class LicensePlateDetector:
         return None
 
     def extract_license_plate_symbols(self, image):
+        custom_configuration = InferenceConfiguration(confidence_threshold=0.6)
         try:
-            results = ROBOFLOW_CLIENT.infer(image, model_id="license-ocr-qqq6v/1")
+            with ROBOFLOW_CLIENT.use_configuration(custom_configuration):
+                results = ROBOFLOW_CLIENT.infer(image, model_id="license-ocr-qqq6v/3")
         except Exception as e:
             logger.exception(f"An error occurred during the external API call: {e}")
             # print(f"An error occurred during the external API call: {e}")

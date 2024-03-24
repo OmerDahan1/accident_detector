@@ -1,9 +1,16 @@
 import time
-
+import os
 import requests
 
-# BASE_URL = "http://localhost:8000"
-BASE_URL="https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
+BASE_URL = "http://localhost:8000"
+# BASE_URL="https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
+
+if os.environ.get('DEPLOYMENT') == 'local':
+    BASE_URL = "http://localhost:8000"
+    print("running locally")
+else:
+    BASE_URL = "https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
+    print("running on azure")
 
 
 def make_call(lisence_plate_number_list):

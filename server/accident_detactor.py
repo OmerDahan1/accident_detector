@@ -23,7 +23,7 @@ class AccidentDetector:
         for prediction in results["predictions"]:
 
             # if prediction["class"] != "severe" or prediction["class"] != "moderate":
-            if prediction["class"] != "vehicle":
+            if prediction["class"] != "accident":
                 # logger.info(f"frame {frame_id}: no predictions")
                 continue
             # logger.info(f"frame {frame_id}: detacted accident in - class {prediction['class']}")
@@ -41,8 +41,9 @@ class AccidentDetector:
                         logger.info(
                             f"frame {frame_id}: license plate {symbols_string} number is already in the list")
                         continue
-                    logger.info(f"frame {frame_id}: added {symbols_string}")
                     self.symbols_list.append(symbols_string)
+                    logger.info(f"frame {frame_id}: added {symbols_string}")
+                    logger.info(f"current list: {self.symbols_list}")
 
         # Depending on your application's needs, you might want to return some information even when the API fails
         return None  # or return a meaningful value

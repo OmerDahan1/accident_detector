@@ -5,7 +5,6 @@ import numpy as np
 from .accident_detactor import AccidentDetector
 from .caller import make_call
 
-
 app = FastAPI()
 accident_detector = AccidentDetector()
 
@@ -27,6 +26,7 @@ async def get_license_plate_symbols():
 @app.post("/report_accident/")
 async def report_accident(plates: list[str]):
     make_call(plates)
+    accident_detector.symbols_list = []
     return {"message": f"Calling the emergency service for the following cars: {plates}"}
 
 

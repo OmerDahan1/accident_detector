@@ -1,13 +1,19 @@
 import cv2
 import numpy as np
 import requests
+import os
 
 # Create a VideoCapture object and read from input file
 # If the input is the camera, pass 0 instead of the video file name
 VIDEO_PATH = "videos/test.mp4"
 cap = cv2.VideoCapture(VIDEO_PATH)
-# BASE_URL = "http://localhost:8000"
-BASE_URL="https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
+if os.environ.get('DEPLOYMENT') == 'local':
+    BASE_URL = "http://localhost:8000"
+    print("running locally")
+else:
+    BASE_URL = "https://accident-detector.proudcoast-e8949542.westus.azurecontainerapps.io"
+    print("running on azure")
+
 
 # Read until video is completed
 
