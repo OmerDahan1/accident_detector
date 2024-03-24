@@ -2,8 +2,10 @@ import cv2
 import numpy as np
 import requests
 import os
+#this is a message for the commit
 
-# Create aa VideoCapture object and read from input file
+
+# Create a VideoCapture object and read from input file
 # If the input is the camera, pass 0 instead of the video file name
 VIDEO_PATH = "videos/test.mp4"
 cap = cv2.VideoCapture(VIDEO_PATH)
